@@ -1,0 +1,135 @@
+%xelatex 或 pdflatex 编译
+%导言区
+\documentclass[UTF8]{article} %UTF8编码
+\input{preface.tex}
+
+%标题页设置
+\title{
+	第一次高微作业
+}
+\author{王美庭\thanks{王美庭, 学号：202020111002, Email: wangmeiting92@gmail.com}}
+\date{\today}
+
+
+
+
+%正文区
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+    %problem boundary--------------------------------------------------------------------
+    \item 以单一物品的拍卖问题为例（一个卖者出售一种不可分单一物品，有 $N\geq 2$ 个潜在买者），证明以下几个引理：
+    \begin{enumerate}
+        \item 如果一个直接机制是激励相容的，那么对于每一个行为人 $i \in I,$ 函数 $Q_{i}$ 是递增的。
+        
+        \textbf{答：}设有 $i,j\in I$，其真实特征分别为 $\theta_i,\theta_j \in [\underline{\theta},\overline{\theta}]$(不妨设 $\theta_i > \theta_j$)，获得商品概率的期望分别为 $Q_i(\theta_i), Q_j(\theta_j)$, 需要支付的期望值分别 $T_i(\theta_i), T_j(\theta_j)$。如果一个直接机制是激励相容的，则有
+        \begin{gather*}
+            \theta_i Q_i(\theta_i) - T_i(\theta_i) \geq \theta_i Q_i(\theta_j) - T_i(\theta_j)  \\
+            \theta_j Q_j(\theta_i) - T_j(\theta_i) \leq \theta_j Q_j(\theta_j) - T_j(\theta_j) 
+        \end{gather*}
+        由于对于每一个 $i\in I$，$\theta_i$ 为独立同分布，则有 $Q_j(\theta_i)=Q_i(\theta_i)$, $T_j(\theta_i)=T_i(\theta_i)$。将该思想应用于以上方程组，
+        \begin{gather}
+            \theta_i Q_i(\theta_i) - T_i(\theta_i) \geq \theta_i Q_i(\theta_j) - T_i(\theta_j) \label{eq:1-1-1} \\
+            \theta_j Q_i(\theta_i) - T_i(\theta_i) \leq \theta_j Q_i(\theta_j) - T_i(\theta_j) \label{eq:1-1-2}
+        \end{gather}
+        方程 \eqref{eq:1-1-1} - \eqref{eq:1-1-2}, 
+        \begin{gather*}
+            (\theta_i-\theta_j)Q_i(\theta_i) \geq (\theta_i-\theta_j)Q_i(\theta_j) \implies Q_i(\theta_i) \geq Q_i(\theta_j)
+        \end{gather*}
+        可得函数 $Q_i$ 是递增的。
+        
+        \item 如果一个直接机制是激励相容的, $U_{i}$ 是递增的，且对于使得 $U_{i}$ 可微的所有 $\theta_i$, $U_{i}$ 满足 $U_{i}^{\prime}\left(\theta_{i}\right)=Q_{i}(\theta_i)$。
+        
+        \textbf{答：}如果一个直接机制是激励相容的, 则有
+        \[ U_i(\theta_i) = \theta_i Q_i(\theta_i) - T_i(\theta_i) \]
+        在 (1) 中已经提到，函数 $Q_i(x)$, $T_i(x)$ 不受下标 $i$ 的影响，因此函数 $U_i(x)$ 也不受下标 $i$ 的影响，则在不失一般性的情况下，这里在计算过程中将略去相关字母的下标 $i$。令 $\delta>0$，对于 $U(\theta)$ 的右导数(这里假设 $U(\theta)$ 的导数存在)，
+        \begin{gather}
+            \begin{split}
+                \lim_{\delta\to 0} \frac{U(\theta+\delta) - U(\theta)}{\delta} &= \lim_{\delta\to 0} \frac{ \left[ (\theta+\delta)Q(\theta+\delta) - T(\theta+\delta) \right] -\left[ \theta Q(\theta) - T(\theta) \right]}{\delta} \\
+                &\geq \lim_{\delta\to 0} \frac{ \left[ (\theta+\delta)Q(\theta) - T(\theta) \right] -\left[ \theta Q(\theta) - T(\theta) \right]}{\delta} = Q(\theta)
+            \end{split} \label{eq:1-2-1}
+        \end{gather}
+        对于 $U(\theta)$ 的左导数，
+        \begin{gather}
+            \begin{split}
+                \lim_{\delta\to 0} \frac{U(\theta) - U(\theta-\delta)}{\delta} &= \lim_{\delta\to 0} \frac{ \left[ \theta Q(\theta) - T(\theta) \right] - \left[ (\theta-\delta)Q(\theta-\delta) - T(\theta-\delta) \right]}{\delta} \\
+                &\leq \lim_{\delta\to 0} \frac{ \left[ \theta Q(\theta) - T(\theta) \right] - \left[ (\theta-\delta)Q(\theta) - T(\theta) \right]}{\delta} = Q(\theta)
+            \end{split} \label{eq:1-2-2}
+        \end{gather}
+        由于 $U(\theta)$ 的导数存在，结合方程 \eqref{eq:1-2-1} 和 \eqref{eq:1-2-2}，易得 $U^\prime(\theta) = Q(\theta)$，即 $U_i^\prime(\theta_i) = Q_i(\theta_i)$。
+        
+        \item $U_{i}\left(\theta_{i}\right)=U_{i}(\underline{\theta})+\int_{\underline{\theta}}^{\theta_{i}} Q_{i}(x) \diff x$
+        
+        \textbf{答：}由牛顿-莱布尼茨公式，有
+        \[ U_{i}\left(\theta_{i}\right) - U_{i}(\underline{\theta}) = \int_{\underline{\theta}}^{\theta_{i}} U^\prime_{i}(x) \diff x = \int_{\underline{\theta}}^{\theta_{i}} Q_{i}(x) \diff x \]
+        即
+        \begin{gather}
+        U_{i}\left(\theta_{i}\right)=U_{i}(\underline{\theta})+\int_{\underline{\theta}}^{\theta_{i}} Q_{i}(x) \diff x \label{eq:1-3-1}
+        \end{gather}
+        
+        \item $T_{i}\left(\theta_{i}\right)=T_{i}(\underline{\theta})+\left[\theta_{i} Q_{i}\left(\theta_{i}\right)-\underline{\theta} Q_{i}(\underline{\theta})\right]-\int_{\underline{\theta}}^{\theta_{i}} Q_{i}(x) \diff x$
+        
+        \textbf{答：}由于
+        \begin{gather*}
+            U_i(\theta_i) = \theta_i Q_i(\theta_i) - T_i(\theta_i) \\
+            U_i(\underline{\theta}) = \underline{\theta} Q_i(\underline{\theta}) - T_i(\underline{\theta})
+        \end{gather*}
+        代入方程 \eqref{eq:1-3-1}，
+        \[ \theta_i Q_i(\theta_i) - T_i(\theta_i) = \underline{\theta} Q_i(\underline{\theta}) - T_i(\underline{\theta}) + \int_{\underline{\theta}}^{\theta_{i}} Q_{i}(x) \diff x \]
+        整理得
+        \begin{gather}
+            T_{i}\left(\theta_{i}\right)=T_{i}(\underline{\theta})+\left[\theta_{i} Q_{i}\left(\theta_{i}\right)-\underline{\theta} Q_{i}(\underline{\theta})\right]-\int_{\underline{\theta}}^{\theta_{i}} Q_{i}(x) \diff x
+        \end{gather}
+    \end{enumerate}
+    
+    
+    %problem boundary--------------------------------------------------------------------
+    \item $c=1$, $v(q)=\ln q$, $\theta$ 在 $[0,1]$ 上服从均匀分布，即对于所有的 $\theta\in[0,1]$, $F(\theta)=\theta$ 且 $f(\theta)=1$。求解垄断卖者的最优定价策略。
+    
+    \textbf{答：}由于
+    \[ \theta - \frac{1-F(\theta)}{f(\theta)} = \theta - \frac{1-\theta}{1} = 2\theta - 1 \]
+    关于 $\theta$ 递增，所以 $F$ 是正则分布。在此条件下，对 $q$ 的期望利润最大化选择将由下列条件给出：
+    \begin{itemize}
+        \item 如果
+        \[ v^\prime(0)\left[ \theta - \frac{1-F(\theta)}{f(\theta)} \right] \leq c \]
+        那么 $q(\theta) = 0$。
+        \item 否则，
+        \[ v^\prime\left( q(\theta) \right)\left[ \theta - \frac{1-F(\theta)}{f(\theta)} \right] = c \]
+        此时所对应的 $t(\theta)$ 为
+        \[ t(\theta) = \theta v\left( q(\theta) \right) - \int_{\underline{\theta}}^\theta v\left( q(x) \right) \diff x \]
+    \end{itemize}
+    在第一个条件下，我们可以确认对于 $\theta$ 的哪些值，最优供给量 $q(\theta) = 0$：
+    \begin{align*}
+        v^\prime(0)\left[ \theta - \frac{1-F(\theta)}{f(\theta)} \right] &\leq c \iff \\
+        \theta - \frac{1-F(\theta)}{f(\theta)} &\leq 0 \iff \\
+        2\theta - 1 &\leq 0 \iff \\
+        \theta &\leq 0.5
+    \end{align*}
+    如果 $\theta > 0.5$，我们将进入上述第二个条件，此时最优供给量 $q(\theta)$ 将由下式给出：
+    \begin{align*}
+        v^\prime\left( q(\theta) \right)\left[ \theta - \frac{1-F(\theta)}{f(\theta)} \right] &= c \iff \\
+        \frac{1}{q}(2\theta-1) &= 1 \iff \\
+        q &= 2\theta-1
+    \end{align*}
+    对于货币转移支付 $t(\theta)$，如果 $\theta\leq 0.5$，则其为 0；如果 $\theta>0.5$，则
+    \[ t(\theta) = \theta v\left( q(\theta) \right) - \int_{\underline{\theta}}^\theta v\left( q(x) \right) \diff x = \theta\ln(2\theta-1) - \int_{0.5}^\theta \ln(2x-1) \diff x \]
+    其中
+    \begin{align*}
+       \int_{0.5}^\theta \ln(2x-1) \diff x &\xlongequal{\text{令}\ 2x-1 = t} \frac{1}{2} \int_0^{2\theta-1} \ln t \diff t \\
+       &= \frac{1}{2}\left( t\ln t \Big|_0^{2\theta-1} - \int_0^{2\theta-1} t \diff\,\ln t \right) \\
+       &= \frac{1}{2} \left[ (2\theta-1)\ln(2\theta-1) - (2\theta-1) \right] \\
+       &= \left(\theta-\frac{1}{2}\right)\ln(2\theta-1) - \left(\theta-\frac{1}{2}\right)
+    \end{align*}
+    所以
+    \begin{align*}
+        t(\theta) &= \theta\ln(2\theta-1) - \left[ \left(\theta-\frac{1}{2}\right)\ln(2\theta-1) - \left(\theta-\frac{1}{2}\right) \right] \\
+        &= \frac{1}{2}\ln(2\theta-1) + \left(\theta-\frac{1}{2}\right)
+    \end{align*}
+    将 $\theta$ 与 $q$ 关系 ($q=2\theta-1$) 带入 $t(\theta)$, 得
+    \[ t(q) = \frac{1}{2}\ln q + \frac{1}{2}q,\ 0 < q \leq 1 \]
+    由于垄断卖者不可能接受负的支付，所以我们要求 $t(q)$ 非负。由于 $t(q)$ 在 $(0,1]$ 上递增，且
+    \[ \lim_{q\to 0} t(q) = -\infty,\ t(1)=\frac{1}{2} > 0 \]
+    所以必存在 $q^* \in (0,1)$，使得 $t(q^*) = 0$，且当 $q\in (q^*,1]$ 时，有 $t(q)>0$。综上，垄断卖者的最优定价策略为：买者可以购买任意数量 $q\in [q^*,1]$ 的商品，然后必须付出 $t(q)=\frac{1}{2}\ln q + \frac{1}{2}q$ 的成本。
+\end{enumerate}
+\end{document}
